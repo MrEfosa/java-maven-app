@@ -14,6 +14,7 @@ pipeline {
                 }
             }
         }
+        
         stage("build jar") {
             steps {
                 script {
@@ -22,12 +23,8 @@ pipeline {
                 }
             }
         }
+        
         stage("build image") {
-            when {
-                expression { 
-                    BRANCH_NAME == "master"
-                 }
-            }
             steps {
                 script {
                     echo "building image"
@@ -35,12 +32,8 @@ pipeline {
                 }
             }
         }
+        
         stage("push image") {
-            when {
-                expression { 
-                    BRANCH_NAME == "master"
-                 }
-            }
             steps {
                 script {
                     echo "pushing image"
