@@ -36,8 +36,8 @@ pipeline {
         stage("push image") {
             steps {
                 script {
-                    echo "pushing image"
-                    gv.pushImage()
+                    echo "deploying application"
+                    gv.deployApp()
                 }
             }
         }
