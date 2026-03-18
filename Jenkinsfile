@@ -42,11 +42,18 @@ pipeline {
                 }
             }
         }
-        
+        stage("login to Docker Hub") {
+            steps {
+                script {
+                    def docker = new com.example.Docker(this)
+                    docker.loginToDockerHub()
+                }
+            }
+        }
         stage("push image") {
             steps {
                     script {
-                    gv.deployApp()
+                    pushImage("sirdavidchris/java-maven-app:3.2")   
                 }
             }
         }
