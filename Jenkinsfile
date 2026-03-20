@@ -35,21 +35,16 @@ pipeline {
             }
         }
         
-        stage("build image") {
+        stage("build and push image") {
             steps {
                 script {
-                    buildImage("sirdavidchris/java-maven-app:3.2") 
+                    buildImage("sirdavidchris/java-maven-app:3.2")
+                    dockerLogin()
+                    dockerPush("sirdavidchris/java-maven-app:3.2")
                 }
             }
         }
-        stage("login to Docker Hub") {
-            steps {
-                script {
-                    def docker = new com.example.Docker(this)
-                    docker.loginToDockerHub()
-                }
-            }
-        }
+        
         stage("push image") {
             steps {
                     script {
