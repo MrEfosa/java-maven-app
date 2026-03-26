@@ -44,13 +44,5 @@ pipeline {
                 }
             }
         }
-        
-        stage("push image") {
-            steps {
-                    script {
-                    pushImage("sirdavidchris/java-maven-app:3.2")   
-                }
-            }
-        }
     }
 }
