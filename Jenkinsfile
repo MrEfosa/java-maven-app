@@ -53,6 +53,7 @@ pipeline {
                 }
             }
         }
+<<<<<<< HEAD
 
         stage("push image") {
             steps {
@@ -61,5 +62,7 @@ pipeline {
                 }
             }
         }
+=======
+>>>>>>> 923f681b13045e523c281ee223d41cd0acf9d1e6
     }
 }
