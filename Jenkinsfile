@@ -1,5 +1,14 @@
 #!/usr/bin/env groovy
-@Library("jenkins-shared-library") 
+
+
+Library identifier: "jenkins-shared-library", retriever: modernSCM(
+    scm: [
+        $class: "GitSCM",
+        branches: [[name: "*/master"]],
+        userRemoteConfigs: [[url: "https://github.com/MrEfosa/jenkins-shared-library.git"]],
+        credentialsId: "github-credentials"
+    ]
+)
 
 def gv
 
@@ -44,7 +53,7 @@ pipeline {
                 }
             }
         }
-        
+
         stage("push image") {
             steps {
                     script {
