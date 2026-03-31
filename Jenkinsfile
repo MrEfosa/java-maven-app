@@ -52,7 +52,5 @@ pipeline {
                 }
             }
         }
-
-        echo "Pipeline completed successfully"
     }
 }
