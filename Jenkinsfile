@@ -46,6 +46,7 @@ pipeline {
         stage("build and push image") {
             steps {
                 script {
+                    echo "building and pushing the image for ${env.BRANCH_NAME} branch"
                     buildImage("sirdavidchris/java-maven-app:3.2")
                     dockerLogin()
                     dockerPush("sirdavidchris/java-maven-app:3.2")
