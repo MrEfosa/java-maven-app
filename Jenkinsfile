@@ -8,7 +8,6 @@ library identifier: 'jenkins-shared-library@master', retriever: modernSCM(
 )
 
 
-
 def gv
 
 pipeline {
@@ -18,6 +17,17 @@ pipeline {
     }
 
     stages {
+        stage('increment version') {
+            steps {
+                script {
+                    def version = incrementVersion()
+                    echo "New version is ${version}"
+                    echo "Image name is ${env.IMAGE_NAME}"
+                }
+                  
+            }
+        }
+
         stage("init") {
             steps {
                 script {
@@ -47,9 +57,27 @@ pipeline {
             steps {
                 script {
                     echo "building and pushing the image for ${env.BRANCH_NAME} branch"
-                    buildImage("sirdavidchris/java-maven-app:3.2")
+                    buildImage("sirdavidchris/java-maven-app:${IMAGE_NAME}")
                     dockerLogin()
-                    dockerPush("sirdavidchris/java-maven-app:3.2")
+                    dockerPush("sirdavidchris/java-maven-app:${IMAGE_NAME}")
+                }
+            }
+        }
+         stage('deploy') {
+            steps {
+                script {
+                    echo 'deploying docker image to EC2...'
+                }
+            }
+        }
+
+        stage('Commit Version Update') {
+            steps {
+                script {
+                    gitCommitAndPush([
+                        repoUrl: 'https://github.com/MrEfosa/java-maven-app.git',
+                        branch: 'jenkins-shared-lib'
+                    ])
                 }
             }
         }
