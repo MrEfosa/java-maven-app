@@ -32,7 +32,6 @@ pipeline {
             steps {
                 script {
                     echo "building jar"
-                    gv.buildJar()
                 }
             }
         }
@@ -46,7 +45,6 @@ pipeline {
             steps {
                 script {
                     echo "building image"
-                    gv.buildImage()
                 }
             }
         }
