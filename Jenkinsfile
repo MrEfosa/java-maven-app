@@ -66,8 +66,7 @@ pipeline {
          stage('deploy') {
             steps {
                 script {
-                    echo "building image"
-                    gv.buildImage()
+                    echo 'deploying docker image to EC2...'
                 }
             }
         }
