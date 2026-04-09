@@ -76,7 +76,6 @@ pipeline {
                 script {
                     gitCommitAndPush([
                         repoUrl: 'https://github.com/MrEfosa/java-maven-app.git',
-                        branch: 'feature/shared-library-integration',
                     ])
                 }
             }
