@@ -128,17 +128,7 @@ Reusable pipeline steps implemented:
 
 ---
 
-## 📸 (Optional)
-
-Add screenshots here:
-
-* Jenkins pipeline view
-* Successful build logs
-* Docker Hub repository
-
----
-
-## 📬 Future Improvements
+## Future Improvements
 
 * Add automated testing stage
 * Implement environment-based deployments (dev/staging/prod)
