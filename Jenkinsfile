@@ -63,10 +63,13 @@ pipeline {
                 }
             }
         }
-         stage('deploy') {
+         stage('Deploy') {
             steps {
-                script {
-                    echo 'deploying docker image to EC2...'
+                sshagent(['ec2-server-key']) {
+                    script {
+                        def dockerCmd = "docker run -d -p 8080:8080 sirdavidchris/java-maven-app:1.1.4-2"
+                        sh "ssh -o StrictHostKeyChecking=no ec2-user@100.52.234.62 '${dockerCmd}'"
+                    }
                 }
             }
         }
