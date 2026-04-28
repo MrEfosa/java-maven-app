@@ -66,10 +66,12 @@ pipeline {
     
         stage('Deploy') {
             steps {
-                sshagent(['ec2-server-key']) {
-                    script {
-                        def dockerCmd = "docker run -d -p 8080:8080 sirdavidchris/java-maven-app:1.1.4-2"
-                        sh "ssh -o StrictHostKeyChecking=no ec2-user@100.52.234.62 '${dockerCmd}'"
+                script {
+                    echo "Deploying the application to EC2 server..."
+                    def dockerComposeCmd = "docker-compose -f /home/ec2-user/docker-compose.yaml up --detach"
+                    sshagent(['ec2-server-key']) {
+                        sh "scp docker-compose.yaml ec2-user@100.52.234.62:/home/ec2-user/"
+                        sh "ssh -o StrictHostKeyChecking=no ec2-user@100.52.234.62 '${dockerComposeCmd}'"
                     }
                 }
             }
