@@ -66,16 +66,11 @@ pipeline {
     
         stage('Deploy') {
             steps {
-                script {
-                    echo "Deploying the application to EC2 server..."
-                    def shellCmd = "bash server-cmds.sh ${IMAGE_NAME}"
-                    def ec2Instance = "ec2-user@100.52.234.62"
-                    sshagent(['ec2-server-key']) {
-                        sh "scp server-cmds.sh ${ec2Instance}:/home/ec2-user/"
-                        sh "scp docker-compose.yaml ${ec2Instance}:/home/ec2-user/"
-                        sh "ssh -o StrictHostKeyChecking=no ${ec2Instance} '${shellCmd}'"
-                    }
-                }
+                deployToEc2(
+                    imageName: IMAGE_NAME,
+                    ec2Instance: "ec2-user@100.52.234.62",
+                    sshCredential: "ec2-server-key"
+                )
             }
         }
 
