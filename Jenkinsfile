@@ -57,9 +57,9 @@ pipeline {
             steps {
                 script {
                     echo "building and pushing the image for ${env.BRANCH_NAME} branch"
-                    buildImage(env.IMAGE_NAME)
+                    buildImage("sirdavidchris/java-maven-app:${env.IMAGE_NAME}")
                     dockerLogin()
-                    dockerPush(env.IMAGE_NAME)
+                    dockerPush("sirdavidchris/java-maven-app:${env.IMAGE_NAME}")
                 }
             }
         }
