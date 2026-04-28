@@ -63,8 +63,15 @@ pipeline {
                 }
             }
         }
+        
+        stage('deploy') {
+            steps {
+                script {
+                    echo 'deploying docker image to EC2...'
+                }
+            }
+        }
          
-
         stage('Commit Version Update') {
             steps {
                 script {
