@@ -57,9 +57,9 @@ pipeline {
             steps {
                 script {
                     echo "building and pushing the image for ${env.BRANCH_NAME} branch"
-                    buildImage("sirdavidchris/java-maven-app:${IMAGE_NAME}")
+                    buildImage(env.IMAGE_NAME)
                     dockerLogin()
-                    dockerPush("sirdavidchris/java-maven-app:${IMAGE_NAME}")
+                    dockerPush(env.IMAGE_NAME)
                 }
             }
         }
@@ -67,7 +67,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 deployToEc2(
-                    imageName: IMAGE_NAME,
+                    imageName: env.IMAGE_NAME,
                     ec2Instance: "ec2-user@100.52.234.62",
                     sshCredential: "ec2-server-key"
                 )
