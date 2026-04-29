@@ -68,7 +68,7 @@ pipeline {
             steps {
                 deployToEc2(
                     imageName: env.IMAGE_NAME,
-                    ec2Instance: "ec2-user@100.52.234.62",
+                    ec2Instance: "ec2-user@13.218.106.117",
                     sshCredential: "ec2-server-key"
                 )
             }
