@@ -74,6 +74,12 @@ pipeline {
             }
         }
 
+        stage('Clean Workspace') {
+            steps {
+                deleteDir()
+            }
+        }
+
         stage('Commit Version Update') {
             steps {
                 script {
