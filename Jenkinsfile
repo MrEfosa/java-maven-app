@@ -47,8 +47,8 @@ pipeline {
         stage("build jar") {
             steps {
                 script {
-                    echo "building the application for ${env.BRANCH_NAME} branch"
-                    buildJar()
+                    echo "building jar"
+                    gv.buildJar()
                 }
             }
         }
